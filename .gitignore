@@ -1,0 +1,70 @@
+# Workspace-wide ignores. Each app repo also keeps its own .gitignore,
+# so it still works when cloned or rebuilt on its own.
+
+# ── Secrets & local env ────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.jks
+
+# ── Node / TypeScript ──────────────────────────────────────────────
+node_modules/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+.vite/
+src/generated/
+npm-debug.log*
+
+# ── Playwright ─────────────────────────────────────────────────────
+playwright-report/
+test-results/
+blob-report/
+playwright/.cache/
+
+# ── Python ─────────────────────────────────────────────────────────
+.venv/
+__pycache__/
+*.py[cod]
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.hypothesis/
+celerybeat-schedule*
+staticfiles/
+media/
+
+# ── Java / Maven ───────────────────────────────────────────────────
+target/
+*.class
+.mvn/wrapper/maven-wrapper.jar
+hs_err_pid*
+
+# ── Contract tests ─────────────────────────────────────────────────
+.schemathesis/
+schemathesis-report/
+
+# ── Ascent: keep progress.json (your climb), drop its backup ───────
+ascent/data/*.bak
+
+# ── Claude Code: shared skills are committed, personal settings not ─
+.claude/settings.local.json
+.claude/worktrees/
+
+# ── Editors & OS ───────────────────────────────────────────────────
+.idea/
+*.iml
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+*.log
+*.swp

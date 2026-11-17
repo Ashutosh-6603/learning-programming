@@ -1,0 +1,9 @@
+dist/
+coverage/
+playwright-report/
+test-results/
+package-lock.json
+contract/
+STEPS.md
+README.md
+src/lib/api/schema.d.ts

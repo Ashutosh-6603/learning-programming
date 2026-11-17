@@ -1,0 +1,10 @@
+dist/
+coverage/
+src/database/migrations/*-*.ts
+package-lock.json
+contract/
+STEPS.md
+README.md
+.schemathesis/
+schemathesis-report/
+.hypothesis/

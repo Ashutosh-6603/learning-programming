@@ -1,0 +1,11 @@
+node_modules/
+dist/
+coverage/
+drizzle/
+package-lock.json
+contract/
+STEPS.md
+README.md
+.schemathesis/
+schemathesis-report/
+.hypothesis/

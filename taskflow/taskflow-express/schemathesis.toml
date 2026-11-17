@@ -1,0 +1,24 @@
+# Schemathesis contract test configuration (used by `npm run test:contract` and CI).
+# Docs: https://schemathesis.readthedocs.io/en/stable/reference/configuration/
+
+[generation]
+# NUL bytes in strings are valid JSON but Postgres text columns reject them.
+allow-x00 = false
+
+# Cursors are opaque tokens only the server can mint. A fuzzed but schema-valid
+# cursor (e.g. "0") is correctly rejected with 422, so list endpoints may answer 422
+# to otherwise valid-looking input.
+[[operations]]
+include-method = "GET"
+checks.positive_data_acceptance.expected-statuses = [200, 401, 403, 404, 422, 429]
+
+# Two rules make a schema-valid body semantically invalid, by design (422):
+# - names and titles are trimmed before their length is checked, so " " or "\u00a0" is empty;
+# - ids in a body must point into this board or workspace (move target, column, assignee).
+[[operations]]
+include-operation-id = [
+  "register", "updateCurrentUser", "createWorkspace", "updateWorkspace",
+  "createProject", "updateProject", "createColumn", "updateColumn", "moveColumn",
+  "createTask", "updateTask", "moveTask",
+]
+checks.positive_data_acceptance.expected-statuses = [200, 201, 401, 403, 404, 409, 422, 429]

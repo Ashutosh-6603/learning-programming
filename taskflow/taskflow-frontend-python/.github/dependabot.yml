@@ -1,0 +1,39 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      react:
+        patterns: ['react', 'react-dom', '@types/react', '@types/react-dom']
+      tanstack:
+        patterns: ['@tanstack/*']
+      testing:
+        patterns: ['vitest', '@vitest/*', '@testing-library/*', 'jsdom', 'msw', '@playwright/test']
+      lint:
+        patterns: ['eslint', '@eslint/*', 'eslint-*', 'typescript-eslint', 'prettier', 'globals']
+      tailwind:
+        patterns: ['tailwindcss', '@tailwindcss/*', 'tw-animate-css', 'tailwind-merge']
+      openapi:
+        # Same project, released together: the generator and the client that reads its output.
+        patterns: ['openapi-typescript', 'openapi-fetch']
+    ignore:
+      # typescript-eslint supports TypeScript < 6.1; see README.
+      - dependency-name: typescript
+        update-types: ['version-update:semver-major']
+      # The runtime is Node 24 (engines, Dockerfile, CI); its types follow it.
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+  - package-ecosystem: docker
+    directory: /
+    schedule:
+      interval: weekly
+  - package-ecosystem: docker-compose
+    directory: /
+    schedule:
+      interval: weekly
